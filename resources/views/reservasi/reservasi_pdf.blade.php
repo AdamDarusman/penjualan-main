@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Membuat Laporan PDF Dengan DOMPDF Laravel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <style type="text/css">
+        table tr td,
+        table tr th {
+            font-size: 9pt;
+        }
+    </style>
+    <center>
+        <h5>Laporan Reservasi</h4>
+    </center>
+
+    <table class='table table-bordered'>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Pelanggan</th>
+                <th>Paket</th>
+                <th>Tanggal Reservasi Wisata</th>
+                <th>Harga</th>
+                <th>Jumlah Peserta</th>
+                <th>Diskon</th>
+                <th>Nilai Diskon</th>
+                <th>Total Bayar</th>
+                {{-- <th>File Bukti Tf</th> --}}
+                <th>Status Reservasi Wisata</th>
+            </tr>
+        </thead>
+        <tbody>
+            @php($no = 1)
+            @foreach ($reservasi as $row)
+                <tr>
+                    <th>{{ $no++ }}</th>
+                    <td>{{ $row->id_pelanggan }}</td>
+                    <td>{{ $row->id_paket }}</td>
+                    <td>{{ $row->tgl_reservasi_wisata }}</td>
+                    <td>RP.{{ number_format($row->harga) }}</td>
+                    <td>{{ $row->jumlah_peserta }}</td>
+                    <td>{{ number_format($row->diskon) }}%</td>
+                    <td>{{ number_format($row->nilai_diskon) }}%</td>
+                    <td>{{ $row->total_bayar }}</td>
+                    {{-- <td>
+                        <img src="{{ asset('uploads/image_uploads') }}/{{ $row->file_bukti_tf }}"
+                            style="width: 50px; height: 50px; object-fit: cover">
+                    </td> --}}
+                    <td>{{ $row->status_reservasi_wisata }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+</body>
+
+</html>
